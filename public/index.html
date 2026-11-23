@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Choose a time for a 60-minute team appointment.">
+  <title>Book an appointment | TeamTime</title>
+  <link rel="stylesheet" href="/app.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="/" aria-label="TeamTime home"><span class="brand-mark" aria-hidden="true"></span>TeamTime</a>
+      <span id="mode" class="mode" hidden></span>
+    </div>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <div class="shell intro-inner">
+        <h1 id="page-title">Book a 1:1</h1>
+        <div class="intro-details">
+          <p>Choose a date and time that works for you.</p>
+          <ul class="appointment-meta" aria-label="Appointment details">
+            <li><span class="clock-icon" aria-hidden="true"></span>60 minutes</li>
+            <li><span class="zone-icon" aria-hidden="true"></span>Dublin time</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="shell booking-shell">
+      <noscript><p class="message">Enable JavaScript to view and book available times.</p></noscript>
+      <p id="notice" class="message" role="status" hidden></p>
+
+      <section id="schedule" class="booking-card schedule" aria-labelledby="schedule-heading">
+        <div class="date-pane">
+          <h2 id="schedule-heading" tabindex="-1">Select a date</h2>
+          <div id="calendar" hidden>
+            <div class="month-header">
+              <h3 id="month-label" aria-live="polite"></h3>
+              <div class="month-navigation">
+                <button type="button" id="previous-month" class="quiet-button" aria-label="Previous month">Prev</button>
+                <button type="button" id="next-month" class="quiet-button" aria-label="Next month">Next</button>
+              </div>
+            </div>
+            <table id="calendar-table" aria-labelledby="month-label">
+              <thead><tr>
+                <th scope="col" abbr="Monday">Mon</th><th scope="col" abbr="Tuesday">Tue</th>
+                <th scope="col" abbr="Wednesday">Wed</th><th scope="col" abbr="Thursday">Thu</th>
+                <th scope="col" abbr="Friday">Fri</th><th scope="col" abbr="Saturday">Sat</th>
+                <th scope="col" abbr="Sunday">Sun</th>
+              </tr></thead>
+              <tbody id="calendar-days"></tbody>
+            </table>
+            <ul class="legend" aria-label="Calendar key">
+              <li><span class="legend-swatch available-swatch" aria-hidden="true"></span>Available</li>
+              <li><span class="legend-swatch full-swatch" aria-hidden="true"></span>Fully booked</li>
+            </ul>
+          </div>
+          <p id="calendar-message" class="muted" role="status">Finding available dates…</p>
+          <button id="retry-calendar" type="button" class="outline-button" hidden>Try again</button>
+        </div>
+
+        <div class="time-pane">
+          <h2>Select a time</h2>
+          <p id="time-date" class="time-date" aria-live="polite" hidden></p>
+          <p id="slot-message" class="muted" role="status">Choose a date to see appointment times.</p>
+          <button id="retry-slots" type="button" class="outline-button" hidden>Reload times</button>
+          <fieldset id="time-options" class="time-options" hidden>
+            <legend class="sr-only">Appointment start time in Dublin</legend>
+            <div id="slots" class="slots"></div>
+          </fieldset>
+          <button id="continue" type="button" class="primary-button" disabled>Continue</button>
+        </div>
+      </section>
+
+      <section id="details" class="booking-card detail-card" aria-labelledby="details-heading" hidden>
+        <div class="detail-summary">
+          <h2 id="details-heading" tabindex="-1">Your appointment</h2>
+          <p id="details-date" class="summary-date"></p>
+          <p id="details-time" class="muted"></p>
+          <button type="button" id="edit-time" class="outline-button">Change time</button>
+        </div>
+        <form id="booking-form" class="detail-form">
+          <h3>Your details</h3>
+          <label for="name">Full name</label>
+          <input id="name" name="name" autocomplete="name" required maxlength="120">
+          <label for="email">Work email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required maxlength="254">
+          <p id="privacy-note" class="muted form-note">Your contact details are used for the meeting invitation.</p>
+          <p id="form-error" class="message error" role="alert" hidden></p>
+          <button id="confirm" type="submit" class="primary-button">Confirm booking</button>
+        </form>
+      </section>
+
+      <section id="receipt" class="booking-card receipt" aria-labelledby="receipt-heading" hidden>
+        <h2 id="receipt-heading" tabindex="-1"></h2>
+        <p id="receipt-message" class="muted" role="status"></p>
+        <dl class="receipt-details">
+          <dt>Appointment</dt><dd id="receipt-time"></dd>
+          <dt>Booking reference</dt><dd id="receipt-reference" class="reference"></dd>
+        </dl>
+        <p id="receipt-error" class="message error" role="alert" hidden></p>
+        <div class="receipt-actions">
+          <button id="check-status" type="button" class="primary-button" hidden>Check status</button>
+          <button id="book-again" type="button" class="outline-button">Book another appointment</button>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
